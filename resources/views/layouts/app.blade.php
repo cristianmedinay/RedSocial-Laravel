@@ -10,15 +10,33 @@
 <body class="bg-gray-100">
 
     <header class="p-5 border-b bg-white shadow">
+
+
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-3xl font-black">@yield('titulo')</h1>
-            <nav class="flex gap-2 items-center">
-                <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('register')}}">Crear Cuenta</a>
-                <a class="font-bold uppercase text-gray-600 text-sm" href="/nosotros">nosotros</a>
-                <a class="font-bold uppercase text-gray-600 text-sm" href="/tienda">tienda</a>
-                <a class="font-bold uppercase text-gray-600 text-sm" href="/contacto">contacto</a>        
-            </nav>
+           
+            
+            @auth
+                <nav class="flex gap-2 items-center">
+                    Hola : {{auth()->user()->username}}
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="/muro">Dashboard</a>
+                    <form  method="POST" action="{{route('logout')}}">
+                        @csrf
+                        <button type='submit' class="font-bold uppercase text-gray-600 text-sm" >Cerrar Session</button>  
+                    </form>
+                </nav>
+            @endauth
+
+            @guest
+                <nav class="flex gap-2 items-center">
+                 
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('register')}}">Crear Cuenta</a>
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="/login">Login</a>
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('logout')}}">contacto</a>        
+                </nav>
+            @endguest
         </div>
+
         
     </header>
       
