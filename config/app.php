@@ -142,6 +142,7 @@ return [
     'maintenance' => [
         'driver' => 'file',
         // 'store' => 'redis',
+        //'driver' => 'gd',
     ],
 
     /*
@@ -168,6 +169,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        //imagenes
+        //Intervention\Image\Laravel\ImageServiceProvider::class,
+        Intervention\Image\Laravel\ServiceProvider::class
+        
     ])->toArray(),
 
     /*
@@ -183,6 +190,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Image' => Intervention\Image\Laravel\Facades\Image::class,
     ])->toArray(),
 
 ];

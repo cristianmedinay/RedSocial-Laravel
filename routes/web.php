@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PostController;
@@ -35,5 +36,11 @@ Route::get('/muro',[PostController::class,'index'])->name('dashboard');
 
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login',[LoginController::class,'store']);
+Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
-Route::post('/logout',[LogoutController::class,'store'])->name('logout');;
+Route::get('/{user:username}',[PostController::class,'index'])->name('dashboard.index');
+Route::get('/posts/create',[PostController::class,'create'])->name('dashboard.create');
+Route::post('/posts',[PostController::class,'store'])->name('dashboard.store');
+
+
+Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');

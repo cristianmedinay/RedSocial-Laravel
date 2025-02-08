@@ -6,7 +6,7 @@
 
 @section('contenido')
     <div class="md:flex md:justify-center md:gap-10 md:items-center md:gap-10 md:item-center">
-        <div class="md:w-5/12 p-5">
+        <div class="md:w-6/12 p-5">
             <img src="{{asset('img/Diseño/registrar.jpg')}}" alt="Imagen registro de usuarios">
             
         </div>
