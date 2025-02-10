@@ -38,8 +38,8 @@
                         </span> 
                     </a>
 
-{{--                     <a class="font-bold uppercase text-gray-600 text-sm" href="/muro">Dashboard</a>
- --}}                    <form  method="POST" action="{{route('logout')}}">
+                    {{--<a class="font-bold uppercase text-gray-600 text-sm" href="/muro">Dashboard</a>--}}                    
+                    <form  method="POST" action="{{route('logout')}}">
                         @csrf
                         <button type='submit' class="font-bold uppercase text-gray-600 text-sm" >Cerrar Session</button>  
                     </form>
