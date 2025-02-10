@@ -19,7 +19,19 @@
                 <p class="mt-5 text-xl text-gray-500">{{$post->descripcion}}</p>
             </div>
             
-            
+            @auth
+                @if($post->user_id === auth()->user()->id)
+                <form action="{{route('dashboard.destroy', $post)}}" method="POST"  >
+                    <!--metodo spofi-->
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Eliminar Publicacion" class="bg-red-500 hover:bg-red-600
+                        p-2 rounded text-white uppercase font-bold cursor-pointer mt-4 transition-colors"    
+                    >
+
+                </form>
+                @endif
+            @endauth
         </div>
 
         <div class="md:w-1/2 p-5">

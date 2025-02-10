@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -72,6 +73,22 @@ class PostController extends Controller
             'user' => $user
         ]);
     }   
+
+    public function destroy(Post $post) {
+
+        $this->authorize('delete', $post);
+
+        $post->delete();
+
+        $imagen_path = public_path('uploads/' . $post->imagen);
+
+        if (file_exists($imagen_path)) {
+            unlink($imagen_path);
+        }
+
+
+        return redirect()->route('dashboard.index', auth()->user()->username);
+    }
     
 }
 

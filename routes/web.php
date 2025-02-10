@@ -32,7 +32,7 @@ Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::post('/register',[RegisterController::class,'store']);
 
 
-Route::get('/muro',[PostController::class,'index'])->name('dashboard');
+/* Route::get('/muro',[PostController::class,'index'])->name('dashboard'); */
 
 
 Route::get('/login',[LoginController::class,'index'])->name('login');
@@ -46,6 +46,7 @@ Route::get('/{user:username}/posts/{post}',[PostController::class,'show'])->name
 
 
 Route::post('/{user:username}/posts/{post}',[ComentarioController::class,'store'])->name('comentarios.store');
+Route::delete('/posts/{post}',[PostController::class,'destroy'])->name('dashboard.destroy');
 
 
 
