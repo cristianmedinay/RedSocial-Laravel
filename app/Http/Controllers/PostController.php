@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function __construct() {
         //protejemos el controlador
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show', 'index');
 
     }
 
@@ -20,8 +20,12 @@ class PostController extends Controller
 
         //informacion de la sesion
         //dd(auth()->user());
+
+        $posts = Post::where('user_id', $user->id)->paginate(5);
+
         return view('dashboard',[
-            'user' => $user
+            'user' => $user,
+            'posts' => $posts
         ]);
         
 
@@ -44,16 +48,30 @@ class PostController extends Controller
         ]);
 
 
-        Post::create([
+        /* Post::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
             'imagen' => $request->imagen,
             'user_id' => auth()->user()->id
-        ]); 
+        ]);  */
+
+        $request->user()->posts()->create([
+            'titulo' => $request->titulo,
+            'descripcion' => $request->descripcion,
+            'imagen' => $request->imagen,
+            'user_id' => auth()->user()->id
+        ]);
 
         return redirect()->route('dashboard.index', auth()->user()->username);
     }
 
-   
+    
+    public function show(User $user, Post $post) {
+        return view('posts.show', [
+            'post' => $post,
+            'user' => $user
+        ]);
+    }   
+    
 }
 

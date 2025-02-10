@@ -18,4 +18,15 @@ class Post extends Model
     ];
 
 
+    public function user(){
+       
+        return $this->belongsTo(User::class)->select(['name', 'username']);
+
+    }
+
+    // unpost tiene muchos comentarios
+    public function comentarios(){
+        return $this->hasMany(Comentario::class);
+    }
+
 }
