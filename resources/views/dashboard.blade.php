@@ -38,12 +38,42 @@
                 </div>
                     
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    <span class="font-normal"> Seguidores </span>
+                    {{$user->following->count()}}
+                    <span class="font-normal"> @choice('Seguidor|Seguidores', $user->following->count()) </span>
+                </p>
+                <p class="text-gray-800 text-sm mb-3 font-bold">
+                    {{$user->followings->count()}}
+                    <span class="font-normal">Siguiendo</span>
                 </p>
                 <p class="text-gray-800 text-sm mb-3 font-bold">
                     {{$user->posts->count()}}
                     <span class="font-normal"> Posts </span>
                 </p>
+
+                @auth
+                    @if($user->id != auth()->user()->id)
+                        @if($user->siguiendo(auth()->user()))
+
+                            <form action="{{route('user.unfollow', $user)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="bg-red-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer" value="Dejar de Seguir" >                        
+                            </form>
+
+
+                        @else
+                           
+                            <form action="{{route('user.follow', $user)}}" method="POST">
+                                @csrf
+                                <input type="submit" class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer" value="Seguir" >
+                            </form>
+                        @endif
+                  
+                    @endif
+                        
+                @endauth
+
+
             </div>
 
         </div>
@@ -54,12 +84,14 @@
         <h2 class="text-4xl font-black text-center my-10">Publicaciones</h2>
 
 
-        @if($posts -> count())
+        <x-listar-post :posts="$posts" />
+
+        {{-- @if($posts -> count())
             <div class=" grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">  
                 @foreach ($posts as $post)
                 <div>
 
-                    <a href="{{route('dashboard.show', ['post' => $post, 'user' => $user])}}">
+                    <a href="{{route('dashboard.show', ['post' => $post, 'user' => $post->user])}}">
                         <p>{{$post->titulo}}</p>
                         <img src="/uploads/{{$post->imagen}}" alt="imagen publicacion {{$post->titulo}}" class="w-full">
                     </a>
@@ -79,7 +111,7 @@
             <p class="text-center text-gray-600 uppercase text-sm text-center font-bold ">No hay publicaciones aun</p>
 
         @endif
-        
+         --}}
 
     </section>
 

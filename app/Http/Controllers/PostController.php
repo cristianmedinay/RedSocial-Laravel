@@ -22,7 +22,7 @@ class PostController extends Controller
         //informacion de la sesion
         //dd(auth()->user());
 
-        $posts = Post::where('user_id', $user->id)->paginate(5);
+        $posts = Post::where('user_id', $user->id)->latest()->paginate(5);
 
         return view('dashboard',[
             'user' => $user,

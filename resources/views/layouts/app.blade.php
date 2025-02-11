@@ -17,7 +17,12 @@
 
 
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-black">@yield('titulo')</h1>
+            <h1 class="text-3xl font-black">{{-- @yield('titulo') --}}
+
+                <a href="{{route('home')}}" class="text-black">
+                    DevStagram
+                </a>
+            </h1>
            
             
             @auth

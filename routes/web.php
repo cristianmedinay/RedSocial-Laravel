@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
@@ -20,11 +22,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//cloudshure ruta simple
 Route::get('/', function () {
     return view('principal');
 });
 
+
+//una ruta que tiene un controlador y solo un metodo le pasas solo el controlador
+Route::get('/home',HomeController::class)->name('home');
 
 
 Route::get('/dashboard', function () {
@@ -64,3 +69,10 @@ Route::delete('/posts/{post}',[PostController::class,'destroy'])->name('dashboar
 Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
 Route::post('/posts/{post}/likes', [LikeController::class, 'store'])->name('dashboard.likes.store');
 Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('dashboard.likes.destroy');
+
+
+Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('user.follow');
+Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('user.unfollow');
+
+
+
